@@ -1,4 +1,4 @@
-package A;
+package TwoA;
 
 public class Manager extends Employee {
     private String managerPosition;
