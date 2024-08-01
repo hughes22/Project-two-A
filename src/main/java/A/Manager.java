@@ -1,3 +1,5 @@
+package A;
+
 public class Manager extends Employee {
     private String managerPosition;
         public Manager(String name, int ID, int salary, String managerPosition) {
@@ -7,13 +9,13 @@ public class Manager extends Employee {
         @Override
     public double calculateBonus() {
         if(this.managerPosition == "HR"){
-            return getSalary() * 0.12;
+            return getSalary() * 1.2;
         }
         else if (this.managerPosition == "General Manager"){
-            return getSalary() * 2;
+            return getSalary() * 3;
         }
         else if(this.managerPosition == "Accountant"){
-            return getSalary() * 0.15;
+            return getSalary() * 2.5;
         }
         else {
             throw new IllegalArgumentException("Invalid Manger Position, Must enter HR or General Manager or Accountant ");
