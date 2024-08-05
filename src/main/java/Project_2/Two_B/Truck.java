@@ -1,4 +1,4 @@
-package TwoB;
+package Project_2.Two_B;
 
 public class Truck extends Vehicle {
 

@@ -1,4 +1,4 @@
-package TwoB;
+package Project_2.Two_B;
 
 public class VehicleRentalSystem {
         public static void main(String[] args) {

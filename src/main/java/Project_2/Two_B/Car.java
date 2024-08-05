@@ -1,6 +1,6 @@
-package TwoB;
+package Project_2.Two_B;
 
-public class Car extends TwoB.Vehicle {
+public class Car extends Vehicle {
     int numSeats;
 
     public Car(String vehicleType, String licenseNumber, int rentalRatePerDay, int numSeats) {
