@@ -1,4 +1,4 @@
-package TwoA;
+package Project_2.Two_A;
 
 public class Developer extends Employee {
     private  String developerPosition;
