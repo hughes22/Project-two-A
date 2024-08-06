@@ -1,0 +1,43 @@
+# GitLab CI configuration file for a Maven project
+
+stages:
+  - build
+  - test
+
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
+  CHROME_BIN: "/usr/bin/google-chrome-stable"
+  CHROME_DRIVER: "/usr/bin/chromedriver"
+
+before_script:
+  # Install Maven
+  - apt-get update && apt-get install -y maven
+  # Add Google Chrome repository and install Chrome
+  # Downloads the Google Chrome signing key and adds it to the list of trusted keys for package verification.
+  - wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
+  # Adds the Google Chrome repository to the list of package sources.
+  - sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
+  # Updates the package lists again and installs Google Chrome stable version. This is necessary if your tests require a browser environment, particularly Chrome.
+  - apt-get update && apt-get install -y google-chrome-stable
+  # XVFB is used for running graphical applications without a display device.
+  - apt-get install -y xvfb
+  # Setup cache for Maven dependencies
+  - mkdir -p ~/.m2/repository
+
+cache:
+  key: ${CI_JOB_NAME}
+  paths:
+    - .m2/repository
+
+build:
+  stage: build
+  script:
+    - mvn clean compile
+  artifacts:
+    paths:
+      - target/*.jar
+
+test:
+  stage: test
+  script:
+    - xvfb-run --server-args="-screen 0 1920x1080x24" mvn verify
